@@ -1,0 +1,1 @@
+# synthai-hackathon
