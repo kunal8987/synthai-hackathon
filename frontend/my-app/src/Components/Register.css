@@ -1,0 +1,25 @@
+.register{
+    width:30%;
+    height: 100vh;
+    margin:auto;
+    padding:10px;
+}
+.register-h1{
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-family: serif;
+    margin-top: 50px;
+}
+.reg-input{
+    border: 1px solid blueviolet;
+    width: 100%;
+}
+.reg-button{
+    background-color: blue;
+    color:white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+
+}
