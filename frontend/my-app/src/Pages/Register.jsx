@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 import "../Components/Register.css";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate=useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,9 +20,11 @@ function Register() {
     };
 
     axios
-      .post(``, payload)
+      .post(`https://real-rose-peacock-tutu.cyclic.app/user/signup`, payload)
       .then((res) => {
-        alert(res.data.msg);
+        console.log(res)
+        alert("Register successfull!");
+        navigate("/")
       })
       .catch((err) => console.log(err.message));
     setName("");

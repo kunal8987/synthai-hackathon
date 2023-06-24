@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 import "../Components/Register.css";
 
 function Login() {
@@ -16,11 +17,14 @@ function Login() {
     };
 
     axios
-      .post(``, payload)
+      .post(`https://real-rose-peacock-tutu.cyclic.app/user/login`, payload)
       .then((res) => {
-        alert(res.data.msg);
+        console.log(res)
         if (res.data.token) {
+          alert("Login Successfull!");
           navigate("/home");
+        }else{
+          alert("Please enter correct email and password!")
         }
       })
       .catch((err) => console.log(err));
