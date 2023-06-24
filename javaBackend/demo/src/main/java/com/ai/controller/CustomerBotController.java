@@ -11,7 +11,6 @@ import com.ai.dto.ChatGPTRequest;
 import com.ai.dto.ChatGPTResponse;
 
 @RestController
-@RequestMapping("/bot")
 public class CustomerBotController {
 	
 	@Value("${openai.model}")
