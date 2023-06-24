@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Components/Register.css";
 
@@ -9,12 +9,23 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     let payload = {
       name,
       email,
       password,
     };
-    console.log(payload);
+
+    axios
+      .post(``, payload)
+      .then((res) => {
+        alert(res.data.msg);
+      })
+      .catch((err) => console.log(err.message));
+    setName("");
+    setEmail("");
+    setPassword("");
+    // console.log(payload);
   };
 
   return (
