@@ -37,6 +37,10 @@ function Login() {
     // }
   };
 
+  const handleGoogle=()=>{
+    navigate("https://real-rose-peacock-tutu.cyclic.app/auth/google")
+  }
+
   return (
     <div className="register">
       <h1 className="register-h1">Login</h1>
@@ -69,7 +73,9 @@ function Login() {
         <br />
       </form>
       <div className="text-center">
+      <Link to="https://real-rose-peacock-tutu.cyclic.app/auth/google" >
         <button className="reg-button">Login with Google</button>
+      </Link>
       </div>
       <br />
       <div className="text-center">
