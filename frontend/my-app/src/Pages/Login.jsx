@@ -14,11 +14,23 @@ function Login() {
       email,
       password,
     };
+
+    axios
+      .post(``, payload)
+      .then((res) => {
+        alert(res.data.msg);
+        if (res.data.token) {
+          navigate("/home");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    setEmail("");
+    setPassword("");
     console.log(payload);
     // if(token){
     //     navigate("/home");
     // }
-    
   };
 
   return (
