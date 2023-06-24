@@ -39,17 +39,25 @@ function HomePage() {
   };
 
   const getBotData = async () => {
-    const data= await axios.get(
-      "http://localhost:8888/chat",
-      {text},
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
+    // const data= await axios.get(
+    //   `http://localhost:8888/chat?prompt=${text}`,
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+    let res=await fetch(`http://localhost:8888/chat?prompt=${text}`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json"
       }
-    );
+    })
+    let data=await res.json()
+    console.log("data",data)
     return data;
   };
+  console.log("text",text)
 
   const handleSubmit = () => {
     if (micro) {
@@ -64,7 +72,10 @@ function HomePage() {
 
       getBotData()
         .then((res) => {
-          managePost(res.bot.trim(), true, false);
+          console.log("res",res)
+          let name=res?.choices[0].message?.content
+          console.log("name",name)
+          managePost(name.trim(), true, false);
         })
         .catch((err) => {
           managePost("There is Some Error....", true, false);
@@ -83,7 +94,10 @@ function HomePage() {
 
       getBotData()
         .then((res) => {
-          managePost(res.bot.trim(), true, false);
+          console.log("res",res)
+          let name=res?.choices[0].message?.content
+          console.log("name",name)
+          managePost(name.trim(), true, false);
         })
         .catch((err) => {
           managePost("There is Some Error....", true, false);
