@@ -5,8 +5,8 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import "../Components/Style.css";
 import send from "../images/send.svg";
-import bot from "../images/bot.png"
-import user from "../images/user.png"
+import bot from "../images/bot.png";
+import user from "../images/user.png";
 
 function HomePage() {
   const [text, setText] = useState("");
@@ -16,8 +16,7 @@ function HomePage() {
   useEffect(() => {
     document.querySelector(".layout").scrollTop =
       document.querySelector(".layout").scrollHeight;
-
-  }, [posts,micro,text]);
+  }, [posts, micro, text]);
 
   const {
     transcript,
@@ -39,89 +38,78 @@ function HomePage() {
     }
   };
 
-  
-  const getBotData=async()=>{
-    const { data } = await axios.post(
-        "https://autochat.onrender.com",
-        { text },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return data;
-  }
-
-  const handleSubmit = () => {
-    if(micro){
-        if (transcript.trim() === ""){
-            return
-        }
-        managePost(transcript);
-        
-        managePost("Loading....", false, true);
-    
-        setText("");
-    
-        getBotData()
-          .then((res) => {
-            managePost(res.bot.trim(), true, false);
-          })
-          .catch((err) => {
-            managePost(
-              "There is Some Error....",
-              true,
-              false
-            );
-    
-            console.log(err);
-          });
-    }else{
-        if (text.trim() === ""){
-            return
-        }
-        managePost(text);
-        
-        managePost("Loading....", false, true);
-    
-        setText("");
-    
-        getBotData()
-          .then((res) => {
-            managePost(res.bot.trim(), true, false);
-          })
-          .catch((err) => {
-            managePost(
-              "There is Some Error....",
-              true,
-              false
-            );
-    
-            console.log(err);
-          });
-    }
-   
+  const getBotData = async () => {
+    const data= await axios.get(
+      "http://localhost:8888/chat",
+      {text},
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return data;
   };
 
-  const managePost=(post,bot,isLoading)=>{
-    if(bot){
-        AutoTypingBot(post)
-    }else{
-        setPosts((prevState) => {
-            return [
-              ...prevState,
-              {
-                type: isLoading ? "loading" : "user",
-                post,
-              },
-            ];
-          });
+  const handleSubmit = () => {
+    if (micro) {
+      if (transcript.trim() === "") {
+        return;
+      }
+      managePost(transcript);
+
+      managePost("Loading....", false, true);
+
+      setText("");
+
+      getBotData()
+        .then((res) => {
+          managePost(res.bot.trim(), true, false);
+        })
+        .catch((err) => {
+          managePost("There is Some Error....", true, false);
+
+          console.log(err);
+        });
+    } else {
+      if (text.trim() === "") {
+        return;
+      }
+      managePost(text);
+
+      managePost("Loading....", false, true);
+
+      setText("");
+
+      getBotData()
+        .then((res) => {
+          managePost(res.bot.trim(), true, false);
+        })
+        .catch((err) => {
+          managePost("There is Some Error....", true, false);
+
+          console.log(err);
+        });
     }
+  };
 
-  }
+  const managePost = (post, bot, isLoading) => {
+    if (bot) {
+      AutoTypingBot(post);
+    } else {
+      setPosts((prevState) => {
+        return [
+          ...prevState,
+          {
+            type: isLoading ? "loading" : "user",
+            post,
+          },
+        ];
+      });
+    }
+  };
 
-  const AutoTypingBot=(text)=>{
+  const AutoTypingBot = (text) => {
     let index = 0;
     let interval = setInterval(() => {
       if (index < text.length) {
@@ -143,11 +131,9 @@ function HomePage() {
         index++;
       } else {
         clearInterval(interval);
-        
       }
     }, 20);
-
-  }
+  };
 
   const handleEnter = (e) => {
     if (e.key === "Enter" || e.keyCode === 13) {
@@ -155,42 +141,43 @@ function HomePage() {
     }
   };
 
-  console.log("posts",posts)
+  console.log("posts", posts);
   return (
     <div className="main">
       <h1 className="heading">Synth AI</h1>
       <div className="maincontainer">
         <div className="layout">
-            {posts && posts.map((el,index)=>(
-                <div key={index}>
-                    {/* {el.type}-{el.post} */}
-                    <div className="postImage">
-                        <img className="postImage-img" src={el.type=="user"? user:bot} alt="postImage" />
-                        <h1 className="postImage-h1">{el.post}</h1>
-                    </div>
+          {posts &&
+            posts.map((el, index) => (
+              <div key={index}>
+                {/* {el.type}-{el.post} */}
+                <div className="postImage">
+                  <img
+                    className="postImage-img"
+                    src={el.type == "user" ? user : bot}
+                    alt="postImage"
+                  />
+                  <h1 className="postImage-h1">{el.post}</h1>
                 </div>
-
+              </div>
             ))}
-
         </div>
       </div>
       <div className="inputbox">
         <div className="input-button">
-          <div>
-            <input
-              type="text"
-              autoFocus
-              placeholder="Send a message..."
-              onKeyUp={handleEnter}
-              value={micro ? transcript : text}
-              onChange={(e) => setText(e.target.value)}
-            />
-          </div>
-          <div>
-            <button onClick={handleSubmit}>
-              <img className="send-button" src={send} />
-            </button>
-          </div>
+          <input
+            className="inputbox-input-div"
+            type="text"
+            autoFocus
+            placeholder="Send a message..."
+            onKeyUp={handleEnter}
+            value={micro ? transcript : text}
+            onChange={(e) => setText(e.target.value)}
+          />
+           <button onClick={handleSubmit} className="inputbox-input-button">
+            {/* <img className="send-button" src={send} /> */}
+            Send
+          </button>
         </div>
         <div className="micro" onClick={handleMicro}>
           <img
