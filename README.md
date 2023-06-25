@@ -11,6 +11,7 @@ we have not deploy anywhere so we need to run backend server manualy. we need so
 Java Backend Port :- `https://localhost:8888/chat?prompt="Your question"`
 
 Node Backend :- 
+(Monojoy Rabha , Swapnil Solanki).We have created the backend route for Registration and Login for the user.We also Imlemented Google Auth where user can login with google.
 
 Frontend :-
 ( Vinaykumar Hatwar , Kunal Deotale )
