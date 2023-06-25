@@ -2,10 +2,12 @@
 
 Synth Ai can be used for various applications, including answering questions, providing explanations, offering suggestions, and engaging in general conversation.
 
-Team Member :- Vinaykumar Hatwar , Shusheel Kumar , Monojoy Rabha , Kunal Deotale , Ankit Choubey , Swapnil Solanki
+Team Member :- Vinaykumar Hatwar , Susheel Kumar , Monojoy Rabha , Kunal Deotale , Ankit Choubey , Swapnil Solanki
 
 
-Java Backend :-
+Java Backend :- (  Ankit Choubey, Susheel Kumar ) we have created spring boot project and integrated with Open AI. For this first we neet Open Api key. 
+we have not deploy anywhere so we need to run backend server manualy. we need some tool like ( IntelliJ IDEA / VS Code / Eclipse / STS ) for running starting application.
+Java Backend Port :- `https://localhost:8888/chat?prompt="Your question"`
 
 Node Backend :- 
 
