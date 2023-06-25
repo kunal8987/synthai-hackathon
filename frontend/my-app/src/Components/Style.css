@@ -5,6 +5,31 @@
     margin:auto;
     
   }
+  .heading-div{
+    width: 70%;
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .save-div{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    border:1px solid white;
+    margin-top: 10px;
+
+  }
+  .save-div-que{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    border:1px solid white;
+    margin-left:10px;
+    margin-top: 10px;
+  }
   .heading{
     text-align: center;
     padding: 40px;
