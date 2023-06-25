@@ -20,7 +20,10 @@ function Login() {
       .post(`https://real-rose-peacock-tutu.cyclic.app/user/login`, payload)
       .then((res) => {
         console.log(res)
+        
         if (res.data.token) {
+          let tokenValue=res.data.token
+          localStorage.setItem("token",tokenValue)
           alert("Login Successfull!");
           navigate("/home");
         }else{

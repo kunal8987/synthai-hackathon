@@ -7,11 +7,14 @@ import "../Components/Style.css";
 import send from "../images/send.svg";
 import bot from "../images/bot.png";
 import user from "../images/user.png";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [text, setText] = useState("");
   const [posts, setPosts] = useState([]);
   const [micro, setMicro] = useState(false);
+
+  const navigate=useNavigate()
 
   useEffect(() => {
     document.querySelector(".layout").scrollTop =
@@ -156,9 +159,38 @@ function HomePage() {
   };
 
   console.log("posts", posts);
+
+  const handleSave=()=>{
+    fetch("https://real-rose-peacock-tutu.cyclic.app/save/add",{
+      method:"POST",
+      body:JSON.stringify(posts),
+      headers:{
+        "Content-Type":"application/json",
+        Authorization:`${localStorage.getItem("token")}`
+      }
+    })
+    .then((res)=>res.json())
+    .then((res)=>{
+      console.log(res)
+      alert("Your Data Save!")
+
+    })
+    .catch((err)=>{
+      console.log(err)
+      alert("Something Wrong!..")
+    })
+    
+  }
   return (
     <div className="main">
-      <h1 className="heading">Synth AI</h1>
+      <div className="heading-div">
+        <h1 className="heading">Synth AI</h1>
+        <div style={{display:"flex", alignItems:"center"}}>
+          <button className="save-div" style={{display:posts.length==0? "none":"block"}} onClick={handleSave}>Save</button>
+          <button className="save-div-que" onClick={()=>navigate("/data")}>Que & Ans</button>
+        </div>
+
+      </div>
       <div className="maincontainer">
         <div className="layout">
           {posts &&
